@@ -17,6 +17,7 @@ public class UserServlet extends HttpServlet {
             Cookie[] c=request.getCookies();
             out.println("Name: "+c[1].getValue());
             out.println("<a href=\"/logout\">Back</a>");
+            out.println("<a href=\"/image\">Image Click here</a>");
 
         }catch(Exception exp){
             System.out.println(exp);
