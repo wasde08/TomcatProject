@@ -8,5 +8,8 @@
         <servlet-name>s1</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>servlet.Listener</listener-class>
+    </listener>
 
 </web-app>

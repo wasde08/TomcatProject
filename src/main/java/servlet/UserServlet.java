@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 public class UserServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response){
-        System.out.println("++++++++");
         try{
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
