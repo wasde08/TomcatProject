@@ -1,4 +1,14 @@
 <web-app>
+
+<servlet>
+    <servlet-name>FileUploadDemo</servlet-name>
+    <servlet-class>servlet.FileWorkServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>FileUploadDemo</servlet-name>
+    <url-pattern>/upload</url-pattern>
+</servlet-mapping>
+
     <servlet>
         <servlet-name>s1</servlet-name>
         <servlet-class>servlet.UserServlet</servlet-class>

@@ -36,16 +36,6 @@ public class Auth implements Filter {
                 validate = "false";
             }
             if ("true".equals(validate)) {
-               /* resp.addCookie(new Cookie("user1", "Tom"));
-                Cookie[] cookies = req.getCookies();
-                for(Cookie c:cookies){
-                    System.out.println(c.getValue());
-                }
-                System.out.println(cookies.length);
-                Cookie cookie = new Cookie("q","w");
-                cookie.setPath("/");
-*/
-
                 resp.addCookie(new Cookie("user1", login));
                 req.getSession().setAttribute("user","name");
                 resp.sendRedirect("/user");
