@@ -1,4 +1,5 @@
 package servlet;
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -26,26 +27,26 @@ public class ImageServlet extends HttpServlet {
                     BasicStroke.JOIN_MITER,
                     10.0f, new float[]{10.0f}, 0.0f));
             Polygon triangles = new Polygon();
-            triangles.addPoint(30,30);
-            triangles.addPoint(60,30);
-            triangles.addPoint(50,70);
+            triangles.addPoint(30, 30);
+            triangles.addPoint(60, 30);
+            triangles.addPoint(50, 70);
             g2.drawPolygon(triangles);
             g2.setStroke(new BasicStroke());
             g2.setColor(Color.red);
-            int[] x = {100,110,110,110,105};
-            int[] y = {100,110,120,120,105};
-            g2.drawPolygon( x,y,5);
+            int[] x = {100, 110, 110, 110, 105};
+            int[] y = {100, 110, 120, 120, 105};
+            g2.drawPolygon(x, y, 5);
 
-            g2.setPaint(new GradientPaint(250,100,Color.GREEN,350, 150,Color.YELLOW));
-            g2.fill (new Ellipse2D.Double(250, 100, 100, 50));
+            g2.setPaint(new GradientPaint(250, 100, Color.GREEN, 350, 150, Color.YELLOW));
+            g2.fill(new Ellipse2D.Double(250, 100, 100, 50));
             g2.dispose();
             return imgBuff;
         }
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response){
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("image/jpeg");
-        try(ServletOutputStream out = response.getOutputStream()) {
+        try (ServletOutputStream out = response.getOutputStream()) {
             ImageIO.write(Imagination.drawGraphics(), "jpeg", out);
         } catch (IOException e) {
             e.printStackTrace();

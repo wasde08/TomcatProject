@@ -9,12 +9,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;*/
 
 import java.io.*;
 import java.sql.*;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
 
 public class Service {
 
     public static void main(String[] args) {
-        //save(new File("t.txt"));
-        createTXT();
+        save("e.doc");
+
+        //createTXT();
     }
 
     public static void createTXT() {
@@ -47,14 +50,29 @@ public class Service {
         String st;
         String str = "";
         try (Connection con = JDBCConnection.getDBconnection()) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(name)));
-            while ((st = br.readLine()) != null) {
-                str += st + " ";
+            String n = name.replaceAll("\\.", "|");
+            if (n.split("\\|")[1].equals("doc")){
+                FileInputStream fis = new FileInputStream(name);
+                HWPFDocument document = new HWPFDocument(fis);
+                WordExtractor extractor = new WordExtractor(document);
+                String[] fileData = extractor.getParagraphText();
+                for (int i = 0; i < fileData.length; i++)
+                {
+                    if (fileData[i] != null)
+                        str+= fileData[i] +" ";
+                }
+
+            } else {
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(name)));
+                while ((st = br.readLine()) != null) {
+                    str += st + " ";
+                }
             }
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, 1);
-            pst.setString(2, str);
-            pst.executeUpdate();
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setInt(1, 1);
+                pst.setString(2, str);
+                pst.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -62,6 +80,7 @@ public class Service {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 

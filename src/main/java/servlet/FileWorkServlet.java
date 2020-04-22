@@ -1,11 +1,11 @@
 package servlet;
+
 import DAO.Service;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
+
 public class FileWorkServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +23,7 @@ public class FileWorkServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setRepository(new File("1.txt"));
-        factory.setSizeThreshold(1024 * 1024*3);
+        factory.setSizeThreshold(1024 * 1024 * 3);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
 
@@ -33,7 +34,7 @@ public class FileWorkServlet extends HttpServlet {
             while (iterator.hasNext()) {
                 FileItem fileItem = (FileItem) iterator.next();
                 System.out.println(fileItem);
-                File file = new File("1" +fileItem.getName());
+                File file = new File("1" + fileItem.getName());
                 fileItem.write(file);
                 Service.save(file.getAbsolutePath());
                 writer.println(fileItem.getName() + " is uploaded. <br>");

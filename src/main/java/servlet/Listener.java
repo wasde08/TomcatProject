@@ -7,7 +7,7 @@ public class Listener implements HttpSessionListener {
 
     private static int totalActiveSessions;
 
-    public static int getTotalActiveSession(){
+    public static int getTotalActiveSession() {
         return totalActiveSessions;
     }
 
